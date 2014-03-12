@@ -38,3 +38,4 @@ gem 'jquery-rails'
 # gem 'debugger'
 
 gem 'devise'
+gem 'simple_token_authentication'
