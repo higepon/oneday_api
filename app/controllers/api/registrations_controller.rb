@@ -13,7 +13,7 @@ class Api::RegistrationsController < Devise::RegistrationsController
         return
       else
         expire_session_data_after_sign_in!
-        return render :json => {:success => true}
+        return render :json => {:success => true, :user => @user }
       end
     else
       clean_up_passwords resource
