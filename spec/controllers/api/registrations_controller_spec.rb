@@ -31,7 +31,6 @@ describe Api::RegistrationsController do
     context 'when invalid email is geven' do
       it 'should return error' do
         post :create, { :user => { :email => 'user001', :password => 'abcdefghijklmno' } }
-        pp response.body
         expect(response).not_to be_success
         json = JSON.parse(response.body)
         expect(json['errors'].size).to be > 0
@@ -39,5 +38,14 @@ describe Api::RegistrationsController do
       end
     end
 
+    context 'when user sign up' do
+      it 'should return user mobile authentication_token' do
+        post :create, { :user => { :email => 'john@gmail.com', :password => 'abcdefghijklmno' } }
+        expect(response).to be_success
+        json = JSON.parse(response.body)
+        expect(json['success']).to eq(true)
+        expect(json['user']['authentication_token'].size).to be > 0
+      end
+    end
   end
 end
