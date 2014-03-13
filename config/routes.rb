@@ -1,7 +1,9 @@
 OnedayApi::Application.routes.draw do
   devise_for :users
   devise_scope :user do
-    match 'api/users' => 'api::registrations#create'
+    namespace :api do
+      resource :registrations
+    end
   end
 
   # The priority is based upon order of creation:
