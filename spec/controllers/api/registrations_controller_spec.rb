@@ -9,6 +9,9 @@ describe Api::RegistrationsController do
         post :create, { :user => { :email => "higepon@gmail.com", :password => "a" } }
         expect(response).not_to be_success
         body = response.body
+        json = JSON.parse(response.body)
+        expect(json['errors'].size).to be > 0
+        pp json
         puts body
       end
     end
