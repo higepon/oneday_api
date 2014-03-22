@@ -6,6 +6,14 @@ OnedayApi::Application.routes.draw do
     end
   end
 
+  # api/rooms/1/messages
+  namespace :api do
+    resources :rooms do
+      resources :messages
+    end
+  end
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
