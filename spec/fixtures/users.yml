@@ -1,3 +1,7 @@
 user_001:
   id: 1
   email: 'user001@gmail.com'
+  authentication_token: 'hoge'
+  confirmed_at: '2014-01-01'
+  encrypted_password: "$2a$10$xrSli.L/xj/qD3pODM"
+  confirmation_token: "b9b249dde01925464e00615210bf263e1bde9e29526b7d853d3"

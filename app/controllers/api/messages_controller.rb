@@ -1,6 +1,7 @@
 class Api::MessagesController < ApplicationController
 
   def index
-    return render :json => { }
+    return render :json => {  }
   end
+  
 end

@@ -3,15 +3,14 @@ OnedayApi::Application.routes.draw do
   devise_scope :user do
     namespace :api do
       resource :registrations
+
+      # api/rooms/1/messages
+      resources :rooms do
+        resources :messages
+      end
     end
   end
 
-  # api/rooms/1/messages
-  namespace :api do
-    resources :rooms do
-      resources :messages
-    end
-  end
 
 
   # The priority is based upon order of creation:

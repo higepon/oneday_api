@@ -10,7 +10,7 @@ describe Api::MessagesController do
   describe '#index' do
     context 'when valid room is given' do
       it 'should return messages in room' do
-        get :index, { :room_id => 1 }
+        get :index, { :room_id => 1, :user_email => 'user001@gmail.com', :user_token => 'hoge' }
         puts response.body
         expect(response).to be_success
 #        expect(json['success']).to eq(true)
