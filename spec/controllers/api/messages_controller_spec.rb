@@ -22,6 +22,17 @@ describe Api::MessagesController do
       end
     end
 
+    context 'when invalid room is given' do
+      it 'should return empty ' do
+        get :index, { :room_id => 2, :user_email => 'user001@gmail.com', :user_token => 'hoge' }
+        puts response.body
+        expect(response).to be_success
+        json = JSON.parse(response.body)
+        expect(json.size).to be == 0
+      end
+    end
+
+
     # order
     # invalid room number
   end
