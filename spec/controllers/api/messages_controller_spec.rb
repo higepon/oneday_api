@@ -13,12 +13,12 @@ describe Api::MessagesController do
         puts response.body
         expect(response).to be_success
         json = JSON.parse(response.body)
-        expect(json['messages'].size).to be == 2
-        expect(json['messages'][0]['text']).to eq('I like scheme')
-        expect(json['messages'][1]['text']).to eq('I like lisp')
-        expect(json['messages'][0]['user']['name']).to eq('John Lennon')
-        expect(json['messages'][0]['user']['email']).to be_nil
-        expect(json['messages'][0]['user']['password']).to be_nil
+        expect(json.size).to be == 2
+        expect(json[0]['text']).to eq('I like scheme')
+        expect(json[1]['text']).to eq('I like lisp')
+        expect(json[0]['user']['name']).to eq('John Lennon')
+        expect(json[0]['user']['email']).to be_nil
+        expect(json[0]['user']['password']).to be_nil
       end
     end
 
