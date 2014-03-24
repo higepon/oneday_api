@@ -1,5 +1,6 @@
 user_001:
   id: 1
+  name: 'John Lennon'
   email: 'user001@gmail.com'
   authentication_token: 'hoge'
   confirmed_at: '2014-01-01'
