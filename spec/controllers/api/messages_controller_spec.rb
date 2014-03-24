@@ -32,8 +32,11 @@ describe Api::MessagesController do
       end
     end
 
-
-    # order
-    # invalid room number
+    context 'when invalid user_token is given' do
+      it 'should return error' do
+        get :index, { :room_id => 1, :user_email => 'user001@gmail.com', :user_token => 'hack!' }
+        expect(response).to be_error
+      end
+    end
   end
 end

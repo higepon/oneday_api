@@ -58,9 +58,16 @@ module Warden
           env['warden.options'] = result
           Warden::Manager._run_callbacks(:before_failure, env, result)
 
-          status, headers, body = warden.config[:failure_app].call(env).to_a
-          @controller.send :render, :status => status, :text => body,
+          pp warden
+          if (result[:action] == :unauthenticated && result[:scope] == :user)
+            headers = {}
+            @controller.send :render, :status => :unauthenticated, :text => '',
             :content_type => headers['Content-Type'], :location => headers['Location']
+          else 
+            status, headers, body = warden.config[:failure_app].call(env).to_a
+            @controller.send :render, :status => status, :text => body,
+            :content_type => headers['Content-Type'], :location => headers['Location']
+          end
 
           nil
         else
