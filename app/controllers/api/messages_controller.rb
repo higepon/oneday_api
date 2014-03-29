@@ -3,6 +3,11 @@ class Api::MessagesController < ApplicationController
 
   def index
     ms = Message.find_all_by_room_id(params[:room_id], :order => 'id desc')
+    if (params[:since_id])
+      ms = Message.where(:room_id => params[:room_id]).where('id > ?', params[:since_id]).order('id desc')
+    else
+      ms = Message.where(:room_id => params[:room_id]).order('id desc')
+    end
     respond_with(ms, {:only => [:text, :created_at], :include => [{:user => {:only => [:id, :name]}}]})
   end
 
