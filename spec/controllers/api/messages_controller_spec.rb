@@ -14,7 +14,7 @@ describe Api::MessagesController do
         expect(response).to be_success
         json = JSON.parse(response.body)
         expect(json.size).to be == 3
-        expect(json[0]['text']).to eq('I like news')
+        expect(json[0]['text']).to eq('I like lisp')
         expect(json[1]['text']).to eq('I like scheme')
         expect(json[0]['user']['name']).to eq('John Lennon')
         expect(json[0]['user']['email']).to be_nil

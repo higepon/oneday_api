@@ -2,11 +2,10 @@ class Api::MessagesController < ApplicationController
   respond_to :json
 
   def index
-    ms = Message.find_all_by_room_id(params[:room_id], :order => 'id desc')
     if (params[:since_id])
-      ms = Message.where(:room_id => params[:room_id]).where('id > ?', params[:since_id]).order('id desc')
+      ms = Message.where(:room_id => params[:room_id]).where('id > ?', params[:since_id]).order(:id)
     else
-      ms = Message.where(:room_id => params[:room_id]).order('id desc')
+      ms = Message.where(:room_id => params[:room_id]).order(:id)
     end
     respond_with(ms, {:only => [:text, :created_at], :include => [{:user => {:only => [:id, :name]}}]})
   end
