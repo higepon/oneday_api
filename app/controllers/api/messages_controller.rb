@@ -2,7 +2,7 @@ class Api::MessagesController < ApplicationController
   respond_to :json
 
   def index
-    ms = Message.find_all_by_room_id(params[:room_id], :order => 'created_at')
+    ms = Message.find_all_by_room_id(params[:room_id], :order => 'id desc')
     respond_with(ms, {:only => [:text, :created_at], :include => [{:user => {:only => [:id, :name]}}]})
   end
 
