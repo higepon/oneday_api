@@ -13,6 +13,9 @@ class Api::RegistrationsController < Devise::RegistrationsController
         return
       else
         expire_session_data_after_sign_in!
+        # quick hack
+        @user.confirmed_at = Time.new
+        @user.save!
         return render :json => {:success => true, :user => @user }
       end
     else
