@@ -22,6 +22,17 @@ describe Api::MessagesController do
       end
     end
 
+    context 'when since_id is given' do
+      it 'should return messages in room in created_at order since since_id' do
+        get :index, { :room_id => 1, :user_email => 'user001@gmail.com', :user_token => 'hoge', :since_id => 2 }
+        puts response.body
+        expect(response).to be_success
+        json = JSON.parse(response.body)
+        expect(json.size).to be == 1
+        expect(json[0]['text']).to eq('I like news')
+      end
+    end
+
     context 'when invalid room is given' do
       it 'should return empty ' do
         get :index, { :room_id => 2, :user_email => 'user001@gmail.com', :user_token => 'hoge' }
