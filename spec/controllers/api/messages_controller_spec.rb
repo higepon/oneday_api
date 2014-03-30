@@ -6,6 +6,20 @@ describe Api::MessagesController do
     request.accept = 'application/json'
   end
 
+  describe '#create' do
+    context 'when success' do
+      it 'should return success' do
+        post :create, { :room_id => 1, :user_email => 'user001@gmail.com', :user_token => 'hoge', :text => "Hi there" }
+        puts response.body
+        expect(response).to be_success
+        m = Message.last
+        expect(m.room_id).to eq(1)
+        expect(m.user.email).to eq("user001@gmail.com")
+        expect(m.texg).to eq("Hi there")
+      end
+    end
+  end
+
   describe '#index' do
     context 'when valid room is given' do
       it 'should return messages in room in created_at order' do
