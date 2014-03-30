@@ -10,12 +10,14 @@ class Api::MessagesController < ApplicationController
     respond_with(ms, {:only => [:text, :created_at], :include => [{:user => {:only => [:id, :name]}}]})
   end
 
-    # {:only => [:id, :caption], :methods => [:distance_of_created],
-    #                    :include => [{:photos => {:only => [:id, :name],
-    #                                              :methods => [:url], 
-    #                                              :include => [{:likes => {:include => {:user => {:only => [:avatar_url, :name, :id]}},
-    #                                                            :only => [:id, :user]}}]}},
-    #                                 {:user => {:only => [:id, :name, :avatar_url]}}]}
-
-  
+  def create
+    if params[:text]
+      m = Message.new
+      m.text = params[:text]
+      m.room_id = params[:room_id]
+      m.user_id = current_user.id
+      m.save!
+    end
+    render json: {:status => :success}
+  end
 end

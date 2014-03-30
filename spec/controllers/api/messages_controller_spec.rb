@@ -15,7 +15,7 @@ describe Api::MessagesController do
         m = Message.last
         expect(m.room_id).to eq(1)
         expect(m.user.email).to eq("user001@gmail.com")
-        expect(m.texg).to eq("Hi there")
+        expect(m.text).to eq("Hi there")
       end
     end
   end
