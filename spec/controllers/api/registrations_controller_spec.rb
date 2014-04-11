@@ -22,7 +22,7 @@ describe Api::RegistrationsController do
       it 'should return error' do
         post :create, { :user => { :email => 'user001@gmail.com', :password => 'abcdefghijklmno' } }
         expect(response).not_to be_success
-        puts response.body
+#        puts response.body
         json = JSON.parse(response.body)
         expect(json['errors'].size).to be > 0
         expect(json['errors']['email'][0]).to eq('has already been taken')
@@ -42,7 +42,7 @@ describe Api::RegistrationsController do
     context 'when user sign up' do
       it 'should return user mobile authentication_token' do
         post :create, { :user => { :email => 'john@gmail.com', :password => 'abcdefghijklmno' } }
-        puts response.body
+#        puts response.body
         expect(response).to be_success
         json = JSON.parse(response.body)
         expect(json['success']).to eq(true)

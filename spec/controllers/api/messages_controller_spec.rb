@@ -10,7 +10,6 @@ describe Api::MessagesController do
     context 'when success' do
       it 'should return success' do
         post :create, { :room_id => 1, :user_email => 'user001@gmail.com', :user_token => 'hoge', :text => "Hi there" }
-        puts response.body
         expect(response).to be_success
         m = Message.last
         expect(m.room_id).to eq(1)
@@ -24,7 +23,7 @@ describe Api::MessagesController do
     context 'when valid room is given' do
       it 'should return messages in room in created_at order' do
         get :index, { :room_id => 1, :user_email => 'user001@gmail.com', :user_token => 'hoge' }
-        puts response.body
+#        puts response.body
         expect(response).to be_success
         json = JSON.parse(response.body)
         expect(json.size).to be == 3
@@ -39,7 +38,7 @@ describe Api::MessagesController do
     context 'when since_id is given' do
       it 'should return messages in room in created_at order since since_id' do
         get :index, { :room_id => 1, :user_email => 'user001@gmail.com', :user_token => 'hoge', :since_id => 2 }
-        puts response.body
+#        puts response.body
         expect(response).to be_success
         json = JSON.parse(response.body)
         expect(json.size).to be == 1
@@ -50,7 +49,7 @@ describe Api::MessagesController do
     context 'when invalid room is given' do
       it 'should return empty ' do
         get :index, { :room_id => 2, :user_email => 'user001@gmail.com', :user_token => 'hoge' }
-        puts response.body
+#        puts response.body
         expect(response).to be_success
         json = JSON.parse(response.body)
         expect(json.size).to be == 0

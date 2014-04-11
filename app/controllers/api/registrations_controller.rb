@@ -20,6 +20,7 @@ class Api::RegistrationsController < Devise::RegistrationsController
       end
     else
       clean_up_passwords resource
+#      puts resource.errors
       return render :status => 401, :json => {:errors => resource.errors}
     end
   end
