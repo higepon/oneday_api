@@ -11,6 +11,7 @@ describe Api::MessagesController do
       it 'should return success' do
         post :create, { :room_id => 1, :user_email => 'user001@gmail.com', :user_token => 'hoge', :text => "Hi there" }
         expect(response).to be_success
+puts response.body
         m = Message.last
         expect(m.room_id).to eq(1)
         expect(m.user.email).to eq("user001@gmail.com")
