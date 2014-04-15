@@ -10,7 +10,7 @@ describe Api::RegistrationsController do
   describe '#create' do
     context 'when too short password is given' do
       it 'should return error' do
-        post :create, { :user => { :email => 'higepon@gmail.com', :password => 'a' } }
+        post :create, { :user => { :email => 'higepon@gmail.com', :password => 'a'} }
         expect(response).not_to be_success
         json = JSON.parse(response.body)
         expect(json['errors'].size).to be > 0
@@ -41,7 +41,7 @@ describe Api::RegistrationsController do
 
     context 'when user sign up' do
       it 'should return user mobile authentication_token' do
-        post :create, { :user => { :email => 'john@gmail.com', :password => 'abcdefghijklmno' } }
+        post :create, { :user => { :email => 'john@gmail.com', :password => 'abcdefghijklmno', :name => 'hagepon' } }
 #        puts response.body
         expect(response).to be_success
         json = JSON.parse(response.body)
