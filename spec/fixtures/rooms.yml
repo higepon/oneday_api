@@ -1,3 +1,4 @@
 room_001:
   id: 1
   name: "Scheme"
+  user_id: 1
