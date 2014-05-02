@@ -19,4 +19,17 @@ describe Api::RoomsController do
       end
     end
   end
+
+  describe '#context' do
+    context 'when signed-in user' do
+      it 'should create room' do
+        post :create, { :name => 'Hello, World', :user_email => 'user001@gmail.com', :user_token => 'hoge'}
+        expect(response).to be_success
+        puts response.body
+        room = Room.last
+        expect(room.name).to eq("Hello, World")
+        expect(room.user.name).to eq("John Lennon")
+      end
+    end
+  end
 end
