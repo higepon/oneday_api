@@ -17,9 +17,30 @@ class Api::MessagesController < ApplicationController
       m.room_id = params[:room_id]
       m.user_id = current_user.id
       m.save!
+      if m.text =~ /^@(.+):.*/
+        handle_mention($1)
+      end
       respond_with(m, :include => [{:user => {:only => [:id, :name]}}], :only => [:id, :text, :created_at], :location => '/messages')
       return
     end
     render json: {:status => :error}
+  end
+
+private
+  def handle_mention(name)
+    # User.find_by_name(name).each {|user|
+    # EM.defer do
+    #   n = Rpush::Apns::Notification.new
+    #   n.app = Rapns::Apns::App.find_by_name("OneDayDev")
+    #   dest.devices.each {|device|
+    #     n.device_token = device.token
+    #     n.alert = "#{@user.name} starts following you"
+    #     n.attributes_for_device = {:user_id => @user.id, :type => "new_friend" }
+    #     n.save!
+    #   }
+    #   Rapns.push
+    # end
+      
+    # }
   end
 end
