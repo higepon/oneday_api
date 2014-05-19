@@ -17,7 +17,9 @@ class Api::MessagesController < ApplicationController
       m.room_id = params[:room_id]
       m.user_id = current_user.id
       m.save!
+      puts "******** 1"
       if m.text =~ /^@(.+):.*/
+      puts "******** 2"
         handle_mention($1)
       end
       respond_with(m, :include => [{:user => {:only => [:id, :name]}}], :only => [:id, :text, :created_at], :location => '/messages')
@@ -28,19 +30,20 @@ class Api::MessagesController < ApplicationController
 
 private
   def handle_mention(name)
-    # User.find_by_name(name).each {|user|
-    # EM.defer do
-    #   n = Rpush::Apns::Notification.new
-    #   n.app = Rapns::Apns::App.find_by_name("OneDayDev")
-    #   dest.devices.each {|device|
-    #     n.device_token = device.token
-    #     n.alert = "#{@user.name} starts following you"
-    #     n.attributes_for_device = {:user_id => @user.id, :type => "new_friend" }
-    #     n.save!
-    #   }
-    #   Rapns.push
-    # end
-      
-    # }
+    User.find_all_by_name(name).each {|user|
+    EM.defer do
+      puts "******** 3"
+        n = Rpush::Apns::Notification.new
+        n.app = Rpush::Apns::App.find_by_name("OneDayDev")
+        user.devices.each {|device|
+      puts "******** 4"
+          n.device_token = device.token
+          n.alert = "#{current_user.name} mentioned you"
+          #        n.attributes_for_device = {:user_id => @user.id, :type => "new_friend" }
+          n.save!
+        }
+        Rpush.push
+      end
+    }
   end
 end
