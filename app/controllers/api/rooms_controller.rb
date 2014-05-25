@@ -2,7 +2,7 @@ class Api::RoomsController < ApplicationController
   respond_to :json
 
   def index
-    respond_with(Room.all, {:only => [:id, :name, :created_at], :include => [{:user => {:only => [:id, :name]}}]})
+    respond_with(Room.all, {:only => [:id, :name, :created_at], :methods => [:message_count], :include => [{:user => {:only => [:id, :name]}}]})
   end
 
   def create

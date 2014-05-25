@@ -10,6 +10,7 @@ describe Api::RoomsController do
     context 'when signed-in user' do
       it 'should return rooms' do
         get :index, { :user_email => 'user001@gmail.com', :user_token => 'hoge' }
+        puts response.body
         expect(response).to be_success
         json = JSON.parse(response.body)
         expect(json.size).to be == 1

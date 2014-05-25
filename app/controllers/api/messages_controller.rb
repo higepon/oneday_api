@@ -35,7 +35,7 @@ private
         user.devices.each {|device|
           n.device_token = device.token
           n.alert = "#{current_user.name} mentioned you"
-          n.attributes_for_device = {:room_id => message.room.id, :message_id => message.id, :type => "mentioned" }
+          n.attributes_for_device = {:room => {:id => message.room.id, :name => message.room.name}, :message_id => message.id, :type => "mentioned" }
           n.save!
         }
         Rpush.push
