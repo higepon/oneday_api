@@ -2,7 +2,16 @@ class Api::RoomsController < ApplicationController
   respond_to :json
 
   def index
-    respond_with(Room.all, {:only => [:id, :name, :created_at, :removed], :methods => [:message_count], :include => [{:user => {:only => [:id, :name]}}]})
+    rooms = Room.all
+    rooms.each {|room|
+      unless room.removed
+        if Time.now - room.created_at > 1.day
+          room.removed = true
+          room.save!
+        end
+      end
+    }
+    respond_with(rooms, {:only => [:id, :name, :created_at, :removed], :methods => [:message_count], :include => [{:user => {:only => [:id, :name]}}]})
   end
 
   def create
