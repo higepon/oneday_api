@@ -10,7 +10,7 @@ class Api::RegistrationsController < Devise::RegistrationsController
         sign_in(resource)
         @success = true
         @user = resource
-        return
+        return render :json => {:success => true, :user => @user }
       else
         expire_session_data_after_sign_in!
         # quick hack
