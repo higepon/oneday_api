@@ -30,15 +30,15 @@ private
   def handle_mention(message, name)
     User.find_all_by_name(name).each {|user|
       EM.defer do
-        user.devices.each {|device|
-          n = Rpush::Apns::Notification.new
-          n.app = Rpush::Apns::App.find_by_name("OneDayDev")
-          n.device_token = device.token
-          n.alert = "#{current_user.name} mentioned you"
-          n.attributes_for_device = {:room => {:id => message.room.id, :name => message.room.name}, :message_id => message.id, :type => "mentioned" }
-          n.save!
-        }
-        Rpush.push
+        # user.devices.each {|device|
+        #   n = Rpush::Apns::Notification.new
+        #   n.app = Rpush::Apns::App.find_by_name("OneDayDev")
+        #   n.device_token = device.token
+        #   n.alert = "#{current_user.name} mentioned you"
+        #   n.attributes_for_device = {:room => {:id => message.room.id, :name => message.room.name}, :message_id => message.id, :type => "mentioned" }
+        #   n.save!
+        # }
+        # Rpush.push
       end
     }
   end
