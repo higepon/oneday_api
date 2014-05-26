@@ -1,4 +1,5 @@
-ActionMailer::Base.default_url_options = { host: Settings.default_host }
+#ActionMailer::Base.default_url_options = { host: Settings.default_host }
+ActionMailer::Base.default_url_options = { host: 'oneday-backend.herokuapp.com' }
 
 if Settings.try(:mail)
   ActionMailer::Base.smtp_settings = {
