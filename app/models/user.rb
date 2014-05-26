@@ -14,6 +14,6 @@ class User < ActiveRecord::Base
 
   # this is for not sending email.
   def confirmation_required?
-    !confirmed?
+    false
   end
 end
