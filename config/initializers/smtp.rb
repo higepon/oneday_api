@@ -1,4 +1,4 @@
-ctionMailer::Base.default_url_options = { host: Settings.default_host }
+ActionMailer::Base.default_url_options = { host: Settings.default_host }
 
 if Settings.try(:mail)
   ActionMailer::Base.smtp_settings = {
