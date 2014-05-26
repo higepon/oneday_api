@@ -28,6 +28,16 @@ class Api::MessagesController < ApplicationController
 
 private
   def handle_mention(message, name)
+  if defined?(EventMachine)
+    unless EventMachine.reactor_running? && EventMachine.reactor_thread.alive?
+      if EventMachine.reactor_running?
+        EventMachine.stop_event_loop
+        EventMachine.release_machine
+        EventMachine.instance_variable_set("@reactor_running",false)
+      end
+      Thread.new { EventMachine.run }
+    end
+  end
     User.find_all_by_name(name).each {|user|
       EM.defer do
         n = Rpush::Apns::Notification.new
