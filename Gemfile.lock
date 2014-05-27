@@ -50,7 +50,7 @@ GEM
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
     erubis (2.7.0)
-    eventmachine (1.0.3)
+    eventmachine (0.12.10)
     execjs (2.0.2)
     hike (1.2.3)
     i18n (0.6.1)
@@ -160,7 +160,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   database_cleaner
   devise
-  eventmachine
+  eventmachine (= 0.12.10)
   jquery-rails
   pg
   rails (= 3.2.13)

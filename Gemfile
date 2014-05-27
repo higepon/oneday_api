@@ -46,7 +46,8 @@ end
 gem 'devise'
 gem 'simple_token_authentication'
 gem 'rpush'
-gem 'eventmachine'
+#gem 'eventmachine'
+gem 'eventmachine', '0.12.10'
 gem 'pg'
 group :production do
   gem 'unicorn'
