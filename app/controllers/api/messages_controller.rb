@@ -1,3 +1,5 @@
+require "eventmachine"
+
 class Api::MessagesController < ApplicationController
   respond_to :json
 
