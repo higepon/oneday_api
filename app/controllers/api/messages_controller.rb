@@ -36,7 +36,7 @@ private
           n = Rpush::Apns::Notification.new
           n.app = Rpush::Apns::App.find_by_name("OneDayDev")
           n.device_token = device.token
-          n.alert = "#{current_user.name} #{message}"
+          n.alert = "#{current_user.name} #{message.text}"
           n.attributes_for_device = {:room => {:id => message.room.id, :name => message.room.name}, :message_id => message.id, :type => "mentioned" }
           n.save!
         }
