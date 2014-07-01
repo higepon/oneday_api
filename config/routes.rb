@@ -3,6 +3,7 @@ OnedayApi::Application.routes.draw do
   devise_scope :user do
     namespace :api do
       resource :registrations
+      resource :sessions
       resource :devices
 
       # api/rooms/1/messages

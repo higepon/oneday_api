@@ -33,11 +33,12 @@ private
     User.find_all_by_name(name).each {|user|
       EM.defer do
         user.devices.each {|device|
+          puts "HIHIHIHIH"
           n = Rpush::Apns::Notification.new
           n.app = Rpush::Apns::App.find_by_name("OneDayDev")
           n.device_token = device.token
           n.alert = "#{current_user.name} #{message.text}"
-          n.attributes_for_device = {:room => {:id => message.room.id, :name => message.room.name}, :message_id => message.id, :type => "mentioned" }
+          n.attributes_for_device = {:room => {:id => message.room.id, :name => message.room.name, :created_at => message.room.created_at }, :message_id => message.id, :type => "mentioned" }
           n.save!
         }
         Rpush.push

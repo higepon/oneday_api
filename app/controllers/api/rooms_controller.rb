@@ -2,7 +2,7 @@ class Api::RoomsController < ApplicationController
   respond_to :json
 
   def index
-    rooms = Room.all
+    rooms = Room.all(:order => "created_at desc")
     rooms.each {|room|
       unless room.removed
         if Time.now - room.created_at > 1.day
@@ -20,7 +20,7 @@ class Api::RoomsController < ApplicationController
       room.name = params[:name]
       room.user_id = current_user.id
       room.save!
-      respond_with(room, :include => [{:user => {:only => [:id, :name]}}], :only => [:id, :name, :created_at], :location => '/room')
+      respond_with(room, :include => [{:user => {:only => [:id, :name]}}], :only => [:id, :name, :created_at, :removed], :methods => [:message_count], :location => '/room')
       return
     end
     render json: {:status => :error}

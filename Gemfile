@@ -53,3 +53,4 @@ group :production do
   gem 'unicorn'
 end
 gem 'rails_config'
+gem 'nokogiri'
